@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>TapSense</title>
+        <link rel="stylesheet" href="stylesheet.css">
+    </head>
+    <body>
+        <header></header>
+        
+        <div class="main">
+            <h1>あいうえお</h1>
+            <div class="explanation">ここに上の文字を打ってください</div>
+            <form>
+                <textarea cols="30" rows="10" id="input" onkeydown="getTime(event)"></textarea>
+            </form>
+            <input class="content-submit" type="submit" id="btn" value="終了">
+
+            <p id="time"></p>
+            <p id="count"></p>
+            <p id="time_result"></p>
+            <p id="error_result"></p>
+        </div>
+        
+        <footer></footer>
+
+        <script src="js/main.js"></script>
+    </body>
+</html>
