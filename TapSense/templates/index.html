@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>TapSense</title>
-        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
     </head>
     <body>
         <header></header>
@@ -24,6 +24,6 @@
         
         <footer></footer>
 
-        <script src="js/main.js"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
 </html>
