@@ -3,6 +3,7 @@
 var prev_time = null;
 var list = [];
 var error_count = 0;
+var x = "0";
 
 function getTime(event) {
     const time = new Date();
@@ -23,11 +24,22 @@ function getTime(event) {
 
 const btn = document.getElementById('btn');
 btn.addEventListener('click', () => {
+    $.ajax({
+        type: 'POST',
+        url: '/success',
+        data:JSON.stringify({
+            'timespamps': list,
+            'error_count': error_count
+        }),
+        contentType: 'application/json',
+        success: function(response){
+            console.log(response);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
     document.getElementById("time_result").innerHTML = "経過時間(ミリ秒): " + list; 
     document.getElementById("error_result").innerHTML = "エラー回数: " + error_count; 
-    // btn.textContent = "完了";
-    var fs = WScript.CreateObject("Scripting.FileSystemObject");
-    var file = fs.CreateTextFile("result.csv");
-    file.Write(list);
-    file.Close();
+
 });
