@@ -24,22 +24,27 @@ function getTime(event) {
 
 const btn = document.getElementById('btn');
 btn.addEventListener('click', () => {
-    $.ajax({
-        type: 'POST',
-        url: '/success',
-        data:JSON.stringify({
-            'timespamps': list,
-            'error_count': error_count
-        }),
-        contentType: 'application/json',
-        success: function(response){
-            console.log(response);
-        },
-        error: function(error){
-            console.log(error);
-        }
-    })
-    document.getElementById("time_result").innerHTML = "経過時間(ミリ秒): " + list; 
-    document.getElementById("error_result").innerHTML = "エラー回数: " + error_count; 
-
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/success',
+    //     data:JSON.stringify({
+    //         'timestamps': list,
+    //         'error_count': error_count
+    //     }),
+    //     contentType: 'application/json',
+    //     success: function(response){
+    //         console.log(response);
+    //     },
+    //     error: function(error){
+    //         console.log(error);
+    //     }
+    // })
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open("post", "/data", false);
+    var data = {
+        'timestamps': list,
+        'error_count': error_count
+    };
+    xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+    xmlHttpRequest.send(JSON.stringify(data))
 });

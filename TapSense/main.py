@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, make_response
 import json
 app = Flask(__name__)
 
@@ -10,6 +10,15 @@ def hello_world():
 def success():
     print(request.method)
     print(request.json)
-    print(request.json["timespamps"])
+    print(request.json["timestamps"])
     print(request.json["error_count"])
-    return 'Success'
+    return_json = {
+        "timestamps": request.json["timestamps"],
+        "error_count": request.json["error_count"]
+    }
+    return jsonify(ResultSet=json.dumps(return_json))
+
+@app.route('/data', methods=['POST'])
+def data():
+    print(request.json)
+    return make_response(request.json)
