@@ -40,7 +40,7 @@ btn.addEventListener('click', () => {
     //     }
     // })
     var xmlHttpRequest = new XMLHttpRequest();
-    xmlHttpRequest.open("post", "/data", false);
+    xmlHttpRequest.open("post", "/add_data", false);
     var data = {
         'timestamps': list,
         'error_count': error_count
