@@ -13,3 +13,7 @@ Base.query = db_session.query_property()
 def init_db():
     import models.models
     Base.metadata.create_all(bind=engine)
+
+def clear_db():
+    from models.models import TapRecord
+    TapRecord.__table__.drop(engine)
