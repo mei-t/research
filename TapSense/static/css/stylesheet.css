@@ -26,6 +26,10 @@ textarea {
     display: block;
 }
 
+.name {
+    margin-left: 10px;
+}
+
 input {
     width: 100px;
     /* float: left; */

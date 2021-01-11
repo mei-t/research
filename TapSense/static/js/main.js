@@ -39,11 +39,13 @@ btn.addEventListener('click', () => {
     //         console.log(error);
     //     }
     // })
+    var name = document.getElementById("name").value;
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open("post", "/add_data", false);
     var data = {
         'timestamps': list,
-        'error_count': error_count
+        'error_count': error_count,
+        'name': name
     };
     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
     xmlHttpRequest.send(JSON.stringify(data))

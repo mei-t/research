@@ -23,11 +23,11 @@ def success():
 @app.route('/add_data', methods=['POST'])
 def add_data():
     s = " ".join(map(str, request.json['timestamps']))
-    c = TapRecord(request.json["error_count"], s)
+    c = TapRecord(request.json["error_count"], s, request.json["name"])
     db_session.add(c)
     db_session.commit()
     print(request.json)
-    return
+    return "success"
 
 @app.route('/init', methods=['GET'])
 def init():
