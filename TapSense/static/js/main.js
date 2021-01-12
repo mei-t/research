@@ -40,13 +40,17 @@ btn.addEventListener('click', () => {
     //     }
     // })
     var name = document.getElementById("name").value;
+    var sentence = document.getElementById("sentence").textContent;
+    console.log(sentence);
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open("post", "/add_data", false);
     var data = {
         'timestamps': list,
         'error_count': error_count,
-        'name': name
+        'name': name,
+        'sentence_length': sentence.length
     };
     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
     xmlHttpRequest.send(JSON.stringify(data))
+    alert("データが送信されました。")
 });
