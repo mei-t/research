@@ -41,14 +41,20 @@ btn.addEventListener('click', () => {
     // })
     var name = document.getElementById("name").value;
     var sentence = document.getElementById("sentence").textContent;
-    console.log(sentence);
+    var sentence_length = sentence.length
+    var joy_sadness = document.getElementById("joy_sadness").value;
+    var anger_fear = document.getElementById("anger_fear").value;
+    console.log(sentence_length);
+    console.log(joy_sadness);
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open("post", "/add_data", false);
     var data = {
         'timestamps': list,
         'error_count': error_count,
         'name': name,
-        'sentence_length': sentence.length
+        'sentence_length': sentence_length,
+        'joy_sadness': parseInt(joy_sadness),
+        'anger_fear': parseInt(anger_fear)
     };
     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
     xmlHttpRequest.send(JSON.stringify(data))

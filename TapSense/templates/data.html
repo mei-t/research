@@ -8,7 +8,11 @@
         <header></header>
         
         {% for data in all_data %}
-        <p>{{data.name}}: {{data.error_count}}, {{data.timestamps}}</p>
+        <p>
+            {{data.name}}: joy_sadness: {{data.joy_sadness}}, anger_fear: {{data.anger_fear}},
+            error_count: {{data.error_count}}, sentence_length: {{data.sentence_length}}, 
+            timestamps: {{data.timestamps}}
+        </p>
         {% endfor %}
         
         <footer></footer>
