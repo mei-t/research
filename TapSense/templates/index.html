@@ -14,15 +14,19 @@
             <form>
                 <textarea cols="30" rows="10" id="input" onkeydown="getTime(event)"></textarea>
             </form>
-            <input type="text", id="name", placeholder="Your name">
-            <input type="text", id="joy_sadness", placeholder="喜び(5)⇔悲しみ(-5)">
-            <input type="text", id="anger_fear", placeholder="イライラ(5)⇔不安(-5)">
+            <input class="name_input", type="text", id="name", placeholder="Your name">
+            <input class="emotion_input", type="text", id="joy_sadness", placeholder="喜び(5)⇔悲しみ(-5)">
+            <input class="emotion_input", type="text", id="anger_fear", placeholder="怒り(5)⇔恐れ(-5)">
+            <input class="emotion_input", type="text", id="trust_disgust", placeholder="信頼(5)⇔嫌悪(-5)">
+            <input class="emotion_input", type="text", id="interest_distraction", placeholder="関心(5)⇔放心(-5)">
+            <input class="emotion_input", type="text", id="impression_pessimism", placeholder="感動(5)⇔悲観(-5)">
             <input class="content-submit" type="submit" id="btn" value="終了">
 
             <p id="time"></p>
             <p id="count"></p>
             <p id="time_result"></p>
             <p id="error_result"></p>
+            <!-- <p id="keys"></p> -->
         </div>
         
         <footer></footer>

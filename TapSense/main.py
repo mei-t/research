@@ -34,9 +34,14 @@ def success():
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
-    s = " ".join(map(str, request.json['timestamps']))
+    t = " ".join(map(str, request.json['timestamps']))
+    k = " ".join(request.json['keys'])
     print(type(request.json["joy_sadness"]))
-    c = TapRecord(request.json["error_count"], s, request.json["name"], request.json["sentence_length"], request.json["joy_sadness"], request.json["anger_fear"])
+    print(request.json["keys"])
+    c = TapRecord(request.json["error_count"], t, k, request.json["name"], \
+        request.json["sentence_length"], request.json["joy_sadness"], \
+        request.json["anger_fear"], request.json["trust_disgust"], \
+        request.json["interest_distraction"], request.json["impression_pessimism"])
     db_session.add(c)
     db_session.commit()
     print(request.json)
@@ -49,11 +54,11 @@ def init():
 
 @app.route('/clear', methods=['GET'])
 def clear():
-    # clear_db()
+    clear_db()
     return redirect('/init')
 
 @app.route('/check_data', methods=['GET'])
 def check_data():
     all_data = TapRecord.query.all()
-    print(all_data[0].joy_sadness)
+    # print(all_data[0].joy_sadness)
     return render_template('data.html', all_data=all_data)

@@ -26,16 +26,20 @@ textarea {
     display: block;
 }
 
-.name {
-    margin-left: 10px;
-}
-
 input {
-    width: 100px;
+    width: 50px;
     /* float: left; */
     margin-left: 0;
     margin-right: auto;
     display: block;
+}
+
+.name_input {
+    width: 150px;
+}
+
+.emotion_input {
+    width: 150px;
 }
 
 #demo {
