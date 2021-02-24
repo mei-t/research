@@ -1,5 +1,8 @@
 runtime: python38
 
+resources:
+  memory_gb: 4
+  
 handlers:
 - url: /.*
   script: auto
