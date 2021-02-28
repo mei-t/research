@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify, make_response, redirect
+from flask import Flask, render_template, request, jsonify, make_response, redirect, send_file
 from models.database import init_db, db_session, clear_db
 from models.models import TapRecord
-import json
+import json, io
 import random
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 sent_map = {
     0: "Once when I was a teenager, my father and I were standing in line to buy tickets for the circus. Finally, there was only one family between us and the ticket counter.",
@@ -52,13 +53,63 @@ def init():
     init_db()
     return "Initialize database"
 
-@app.route('/clear', methods=['GET'])
-def clear():
-    clear_db()
-    return redirect('/init')
+# @app.route('/clear', methods=['GET'])
+# def clear():
+#     clear_db()
+#     return redirect('/init')
+
+@app.route('/data', methods=['GET'])
+def data():
+    all_data = TapRecord.query.all()
+    # print(all_data[0].joy_sadness)
+    i = 0
+    d = {}
+    for data in all_data:
+        d[i] = {
+            "name": data.name,
+            "error_count": data.error_count,
+            "timestamps": data.timestamps,
+            "keys": data.keys,
+            "sentence_length": data.sentence_length,
+            "joy_sadness": data.joy_sadness,
+            "anger_fear": data.anger_fear,
+            "trust_disgust": data.trust_disgust,
+            "interest_distraction": data.interest_distraction,
+            "impression_pessimism": data.impression_pessimism
+        }
+        i += 1
+    return jsonify(d)
 
 @app.route('/check_data', methods=['GET'])
 def check_data():
     all_data = TapRecord.query.all()
-    # print(all_data[0].joy_sadness)
     return render_template('data.html', all_data=all_data)
+
+@app.route('/download', methods=['GET'])
+def download():
+    all_data = TapRecord.query.all()
+    print("all_data: ", all_data)
+    i = 0
+    d = {}
+    for data in all_data:
+        d[i] = {
+            "name": data.name,
+            "error_count": data.error_count,
+            "timestamps": data.timestamps,
+            "keys": data.keys,
+            "sentence_length": data.sentence_length,
+            "joy_sadness": data.joy_sadness,
+            "anger_fear": data.anger_fear,
+            "trust_disgust": data.trust_disgust,
+            "interest_distraction": data.interest_distraction,
+            "impression_pessimism": data.impression_pessimism
+        }
+        i += 1
+    
+    s = json.dumps(d, indent=4, ensure_ascii=False)
+    mem = io.BytesIO()
+    mem.write(s.encode('utf-8'))
+    mem.seek(0)
+
+    ret = send_file(mem, mimetype='application/json', as_attachment=True, attachment_filename='data.json')
+    return ret
